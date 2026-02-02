@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Touch | Sovereign Dashboard</title>
+    <meta name="description"
+        content="A premium, local-first 5-in-1 dashboard featuring private AI, encrypted finance ledger, and professional tools.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Libraries -->
+    <script src="https://js.puter.com/v2/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dexie@3/dist/dexie.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css" rel="stylesheet" />
+
+    <!-- Manifest & PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#121417">
+</head>
+
+<body>
+    <!-- Wax Seal Login Button -->
+    <div class="wax-seal-wrapper" id="login-container">
+        <div class="wax-seal" id="google-login-btn" title="Authorize with Vault"></div>
+    </div>
+
+    <main class="dashboard">
+        <!-- The Dial (Clock) -->
+        <div class="card" id="dial">
+            <div class="card-header">
+                <span class="card-title"> clock</span>
+                <span id="date-display" class="serif" style="font-size: 0.9rem; opacity: 0.7;"></span>
+            </div>
+            <div id="clock-display" class="serif"
+                style="font-size: 3rem; text-align: center; margin-top: 10px; color: var(--accent-color);">
+                00:00:00 AM
+            </div>
+        </div>
+
+        <!-- The Ledger (Finance) - Large -->
+        <div class="card card-large" id="ledger">
+            <div class="card-header">
+                <span class="card-title"> money dairy</span>
+                <div class="ledger-summary">
+                    <span id="net-total" class="serif" style="font-size: 1.5rem;">rs 0.00</span>
+                </div>
+            </div>
+            <div class="ledger-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="ledger-form">
+                    <input type="date" id="ledger-date" class="ledger-input">
+                    <input type="number" id="ledger-amount" placeholder="Amount" class="ledger-input">
+                    <select id="ledger-type" class="ledger-input">
+                        <option value="profit">Profit</option>
+                        <option value="loss">Loss</option>
+                    </select>
+                    <input type="text" id="ledger-category" placeholder="Category" class="ledger-input">
+                    <button id="ledger-add" class="ledger-btn">Record Entry</button>
+                </div>
+                <div class="ledger-chart">
+                    <canvas id="balanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Oracle (AI) - Tall -->
+        <div class="card card-tall" id="oracle">
+            <div class="card-header">
+                <span class="card-title"> Oracle ai
+
+                </span>
+                <span id="oracle-status" style="font-size: 0.7rem; color: var(--text-secondary);">Offline</span>
+            </div>
+            <div class="oracle-chat" id="oracle-messages">
+                <div class="message steward">Greetings. I am your Steward. How may I assist you today?</div>
+            </div>
+            <div class="oracle-input-area">
+                <textarea id="oracle-input" placeholder="Inquire the Oracle..."></textarea>
+                <button id="oracle-send" style="display: none;">Send</button>
+            </div>
+            <!-- Gemini API Active (No download required) -->
+        </div>
+
+        <!-- The Reckoner (Calculator) -->
+        <div class="card" id="reckoner">
+            <div class="card-header">
+                <span class="card-title">Calculator</span>
+            </div>
+            <div class="reckoner-display" id="calc-display">0</div>
+            <div class="reckoner-grid">
+                <!-- Calculator buttons will be injected here -->
+            </div>
+        </div>
+
+        <!-- The Quill (Notes) - Wide -->
+        <div class="card card-wide" id="quill">
+            <div class="card-header">
+                <span class="card-title"> notepad</span>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span id="quill-status" style="font-size: 0.7rem; opacity: 0.5;">Saved</span>
+                    <button id="quill-save" class="ledger-btn"
+                        style="width: auto; padding: 5px 15px; font-size: 0.8rem; margin: 0;">Record</button>
+                </div>
+            </div>
+            <textarea id="quill-editor" class="serif" placeholder="Transcribe your thoughts..."></textarea>
+        </div>
+
+        <!-- The Map (Global Node) - Wide -->
+        <div class="card card-wide" id="global-node">
+            <div class="card-header">
+                <span class="card-title"> Vault Location</span>
+            </div>
+            <div id="map"
+                style="height: 300px; width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);"></div>
+        </div>
+
+        <!-- Sponsorship (AdSense) -->
+        <div class="card ad-card" id="sponsorship">
+            <span class="ad-label">Sponsorship Notice</span>
+            <div class="ad-placeholder"
+                style="margin-top: 20px; text-align: center; color: var(--text-secondary); font-style: italic;">
+                Institutional support pending...
+                <!-- AdSense Script would go here -->
+            </div>
+        </div>
+
+        <!-- The Saves (Data Manager) -->
+        <div class="card" id="saves">
+            <div class="card-header">
+                <span class="card-title">Saves</span>
+            </div>
+            <div id="saves-container" class="saves-list">
+                <div style="text-align: center; opacity: 0.5; padding: 20px;">No records found</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Sovereign Status Bar -->
+    <footer class="sovereign-status-bar"
+        style="position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; height: 60px !important; background: #000 !important; border-top: 2px solid gold !important; display: flex !important; justify-content: space-between !important; align-items: center !important; z-index: 9999999 !important; color: white !important; visibility: visible !important; opacity: 1 !important;">
+        <div class="status-left" style="padding-left: 20px;">
+            <div class="status-indicator"></div>
+            <span id="sync-status-text">Vault Active</span>
+        </div>
+        <div class="status-center" style="display: flex; gap: 30px;">
+            <a href="privacy.html"
+                style="color: #C5A059 !important; text-decoration: underline !important; font-size: 1rem !important; font-weight: bold !important; font-family: serif !important;">PRIVACY</a>
+            <a href="terms.html"
+                style="color: #C5A059 !important; text-decoration: underline !important; font-size: 1rem !important; font-weight: bold !important; font-family: serif !important;">TERMS</a>
+            <a href="contact.html"
+                style="color: #C5A059 !important; text-decoration: underline !important; font-size: 1rem !important; font-weight: bold !important; font-family: serif !important;">CONTACT</a>
+        </div>
+        <div class="status-right" style="padding-right: 20px;">
+            <span style="color: #A0A0A0 !important;">&copy; 2026 ONE TOUCH DASHBOARD</span>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module">
+        // Register Service Worker and handle updates
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js?v=10').then(reg => {
+                reg.onupdatefound = () => {
+                    const installingWorker = reg.installing;
+                    installingWorker.onstatechange = () => {
+                        if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            window.location.reload();
+                        }
+                    };
+                };
+            }).catch(err => console.error('SW failed:', err));
+        }
+    </script>
+    <script type="module" src="js/app.js?v=10"></script>
+</body>
+
+</html>

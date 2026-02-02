@@ -1,0 +1,16 @@
+{
+  "name": "One Touch Sovereign Dashboard",
+  "short_name": "One Touch",
+  "description": "Institutional Minimalism Dashboard with Private AI",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#121417",
+  "theme_color": "#121417",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2592/2592201.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

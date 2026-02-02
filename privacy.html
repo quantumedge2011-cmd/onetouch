@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Manifesto | One Touch</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="privacy-container">
+        <a href="index.html" class="back-link">← Return to Vault</a>
+
+        <h1 class="manifesto-title serif">Sovereign Privacy Manifesto</h1>
+
+        <div class="manifesto-section">
+            <h3>I. Local-First Architecture</h3>
+            <p>Your data never leaves your device unencrypted. All records are stored in a local browser database
+                (IndexedDB). We believe that your digital footprint should be as private as your physical one.</p>
+        </div>
+
+        <div class="manifesto-section">
+            <h3>II. End-to-End Encryption</h3>
+            <p>We use the high-security Web Crypto API (AES-GCM) to encrypt your local database. Keys are derived
+                dynamically from your authenticated Google Identity and are never transmitted to or stored on any
+                server.</p>
+        </div>
+
+        <div class="manifesto-section">
+            <h3>III. Private Cloud Sync</h3>
+            <p>Synchronization occurs exclusively with your hidden Google Drive <code>appDataFolder</code>. This is a
+                sanctuary within the cloud, inaccessible to other apps and invisible to the standard Drive UI.</p>
+        </div>
+
+        <div class="manifesto-section">
+            <h3>IV. Local AI Inference</h3>
+            <p>The Oracle (WebLLM) runs models directly on your hardware via WebGPU. Your whispers to the AI stay within
+                the local circuits of your machine, ensuring total conversational sovereignty.</p>
+        </div>
+
+        <div class="manifesto-section">
+            <h3 style="color: #fff; margin-bottom: 20px;">V. AdSense & Cookie Compliance</h3>
+            <p>To support this project, we utilize Google AdSense. Google serves advertisements on this site based on
+                your visits here and across the web. To ensure transparency, we adhere to the following protocols:</p>
+            <ul style="color: #ccc; margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+                <li>Google, as a third-party vendor, uses cookies to serve ads on your site.</li>
+                <li>Google's use of the DART cookie enables it to serve ads to users based on their visit to your sites
+                    and other sites on the Internet.</li>
+                <li>Users may opt out of the use of the DART cookie by visiting the Google Ad and Content Network
+                    privacy policy.</li>
+                <li>Third-party vendors and ad networks may also use cookies to track user interactions for advertising
+                    purposes.</li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- Sovereign Status Bar -->
+    <footer class="sovereign-status-bar">
+        <div class="status-left">
+            <div class="status-indicator"></div>
+            <span>Registry Active</span>
+        </div>
+        <div class="status-center">
+            <a href="privacy.html">PRIVACY</a>
+            <a href="terms.html">TERMS</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+        <div class="status-right">
+            <span>&copy; 2026 ONE TOUCH DASHBOARD</span>
+        </div>
+    </footer>
+</body>
+
+</html>
