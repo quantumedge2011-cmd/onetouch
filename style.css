@@ -40,61 +40,69 @@ h3,
     font-family: var(--font-serif);
 }
 
-/* Layout */
+/* Layout - Fluid Responsive for ANY screen size */
 .dashboard {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto auto auto;
-    gap: 24px;
-    padding: 40px;
+    /* Automatically adjusts columns based on screen width - min 280px per column */
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    grid-auto-rows: auto;
+    gap: clamp(12px, 2vw, 24px);
+    padding: clamp(15px, 4vw, 40px);
+    padding-bottom: clamp(100px, 15vh, 180px);
     max-width: 1600px;
     margin: 0 auto;
+    width: 100%;
 }
 
-/* Bento Cards */
+/* Bento Cards - Fluid sizing */
 .card {
     background: var(--card-bg);
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
-    border-radius: var(--border-radius);
+    border-radius: clamp(16px, 2vw, 24px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: var(--shadow-outer), var(--shadow-inner);
-    padding: 24px;
+    padding: clamp(16px, 3vw, 24px);
     position: relative;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: clamp(150px, 20vh, 300px);
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), var(--shadow-inner);
+@media (hover: hover) {
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), var(--shadow-inner);
+    }
 }
 
 .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: clamp(12px, 2vh, 20px);
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .card-title {
-    font-size: 1.25rem;
+    font-size: clamp(0.85rem, 1.5vw, 1.25rem);
     color: var(--accent-color);
-    letter-spacing: 1px;
+    letter-spacing: clamp(0.5px, 0.1vw, 1px);
     text-transform: uppercase;
 }
 
-/* Wax Seal Login Button */
+/* Wax Seal Login Button - Fluid positioning */
 .wax-seal-wrapper {
     position: absolute;
-    top: 40px;
-    right: 40px;
+    top: clamp(15px, 3vw, 40px);
+    right: clamp(15px, 3vw, 40px);
     z-index: 1000;
 }
 
 .wax-seal {
-    width: 60px;
-    height: 60px;
+    width: clamp(40px, 6vw, 60px);
+    height: clamp(40px, 6vw, 60px);
     background: radial-gradient(circle, #D82B2B 0%, #8B0000 100%);
     border-radius: 50%;
     cursor: pointer;
@@ -107,6 +115,8 @@ h3,
     position: relative;
     border: 3px solid #990000;
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    min-width: 40px;
+    min-height: 40px;
 }
 
 .ledger-btn {
@@ -122,7 +132,7 @@ h3,
     content: "G";
     font-family: var(--font-serif);
     font-weight: bold;
-    font-size: 24px;
+    font-size: clamp(18px, 3vw, 24px);
     color: rgba(255, 255, 255, 0.7);
     transition: opacity 0.3s;
 }
@@ -176,10 +186,11 @@ h3,
     width: 100%;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 10px;
+    border-radius: clamp(6px, 1vw, 8px);
+    padding: clamp(8px, 1.5vw, 12px);
     color: white;
-    margin-bottom: 12px;
+    margin-bottom: clamp(8px, 1.5vh, 12px);
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
 }
 
 .ledger-btn {
@@ -187,19 +198,20 @@ h3,
     background: var(--primary-navy);
     color: white;
     border: none;
-    padding: 12px;
-    border-radius: 8px;
+    padding: clamp(10px, 2vh, 14px);
+    border-radius: clamp(6px, 1vw, 8px);
     cursor: pointer;
+    min-height: 44px;
     font-family: var(--font-serif);
 }
 
 #quill-editor {
     width: 100%;
-    height: 300px;
+    height: clamp(200px, 30vh, 350px);
     background: transparent;
     border: none;
     color: var(--text-primary);
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
     line-height: 1.6;
     resize: none;
     outline: none;
@@ -369,10 +381,10 @@ h3,
     background: #0d0e10;
     color: #49ff49;
     font-family: 'Courier New', monospace;
-    padding: 20px;
+    padding: clamp(12px, 2.5vw, 20px);
     text-align: right;
-    font-size: 2rem;
-    border-radius: 8px;
+    font-size: clamp(1.3rem, 3vw, 2.2rem);
+    border-radius: clamp(6px, 1vw, 8px);
     margin-bottom: 15px;
     border: 1px solid #222;
 }
@@ -380,16 +392,18 @@ h3,
 .reckoner-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    gap: clamp(6px, 1.2vw, 10px);
 }
 
 .calc-btn {
     background: #2a2d31;
     border: 1px solid #3d4248;
     color: white;
-    padding: 15px;
-    border-radius: 8px;
+    padding: clamp(10px, 2vw, 15px);
+    border-radius: clamp(6px, 1vw, 8px);
     cursor: pointer;
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    min-height: 44px;
     transition: all 0.2s;
 }
 
@@ -398,34 +412,40 @@ h3,
     font-weight: bold;
 }
 
-/* Sovereign Status Bar */
+/* Sovereign Status Bar - Fluid responsive */
 .sovereign-status-bar {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50px;
-    /* Explicit height */
-    padding: 0 40px;
+    min-height: clamp(50px, 8vh, 80px);
+    padding: clamp(10px, 2vw, 20px) clamp(15px, 3vw, 40px);
     background: #000000;
-    /* Solid black for max contrast */
     border-top: 1px solid var(--accent-color);
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
+    gap: clamp(10px, 2vw, 20px);
+    font-size: clamp(0.65rem, 1vw, 0.85rem);
+    letter-spacing: clamp(0.5px, 0.1vw, 1px);
     text-transform: uppercase;
     color: var(--text-primary);
     z-index: 9999;
-    /* Force to top */
 }
 
 .status-left,
-.status-right {
+.status-right,
+.status-center {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: clamp(8px, 1.5vw, 15px);
+    flex-wrap: wrap;
+}
+
+.status-center {
+    flex: 1;
+    justify-content: center;
 }
 
 .status-indicator {
@@ -542,4 +562,339 @@ h3,
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-color);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE & TABLET
+   ======================================== */
+
+/* Tablet & Medium Screens (768px - 1024px) */
+@media (max-width: 1024px) {
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 30px 20px 100px;
+        gap: 20px;
+    }
+
+    .card-large,
+    .card-wide,
+    .card-tall {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .wax-seal-wrapper {
+        top: 20px;
+        right: 20px;
+    }
+
+    .wax-seal {
+        width: 50px;
+        height: 50px;
+    }
+
+    #clock-display {
+        font-size: 2.5rem !important;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Mobile Landscape & Small Tablets (481px - 768px) */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 140px;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+        padding: 20px 15px 120px;
+        gap: 16px;
+    }
+
+    .card {
+        padding: 20px;
+        min-height: auto;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .card-title {
+        font-size: 1rem;
+    }
+
+    /* Ledger responsive */
+    .ledger-content {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+
+    .ledger-input,
+    .ledger-btn {
+        font-size: 0.95rem;
+        padding: 12px;
+    }
+
+    /* Oracle chat */
+    .oracle-chat {
+        height: 250px;
+        font-size: 0.85rem;
+    }
+
+    .oracle-input-area textarea {
+        height: 70px;
+        font-size: 0.9rem;
+    }
+
+    /* Calculator */
+    .reckoner-display {
+        font-size: 1.8rem;
+        padding: 15px;
+    }
+
+    .calc-btn {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+
+    /* Notepad */
+    #quill-editor {
+        height: 250px;
+        font-size: 1rem;
+    }
+
+    /* Map */
+    #map {
+        height: 250px !important;
+    }
+
+    /* Status Bar Mobile */
+    .sovereign-status-bar {
+        flex-direction: column;
+        height: auto !important;
+        min-height: 120px;
+        padding: 15px 10px !important;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .status-left,
+    .status-right,
+    .status-center {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .status-center {
+        flex-direction: row;
+        gap: 15px !important;
+    }
+
+    .status-center a {
+        font-size: 0.8rem !important;
+    }
+
+    /* Login button mobile */
+    .wax-seal-wrapper {
+        top: 15px;
+        right: 15px;
+    }
+
+    .wax-seal {
+        width: 45px;
+        height: 45px;
+    }
+
+    .wax-seal::after {
+        font-size: 20px;
+    }
+
+    /* Clock mobile */
+    #clock-display {
+        font-size: 2rem !important;
+    }
+
+    #date-display {
+        font-size: 0.8rem !important;
+    }
+}
+
+/* Mobile Portrait (320px - 480px) */
+@media (max-width: 480px) {
+    body {
+        padding-bottom: 160px;
+    }
+
+    .dashboard {
+        padding: 15px 10px 140px;
+        gap: 12px;
+    }
+
+    .card {
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .card-title {
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+
+    /* Clock extra small */
+    #clock-display {
+        font-size: 1.8rem !important;
+        margin-top: 5px !important;
+    }
+
+    #date-display {
+        font-size: 0.7rem !important;
+    }
+
+    /* Ledger mobile */
+    .ledger-input,
+    .ledger-btn {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    #net-total {
+        font-size: 1.2rem !important;
+    }
+
+    /* Oracle mobile */
+    .oracle-chat {
+        height: 200px;
+        font-size: 0.8rem;
+    }
+
+    .message {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+    }
+
+    .oracle-input-area textarea {
+        height: 60px;
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+
+    /* Calculator mobile */
+    .reckoner-display {
+        font-size: 1.5rem;
+        padding: 12px;
+    }
+
+    .reckoner-grid {
+        gap: 8px;
+    }
+
+    .calc-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    /* Notepad mobile */
+    #quill-editor {
+        height: 200px;
+        font-size: 0.95rem;
+    }
+
+    /* Map mobile */
+    #map {
+        height: 200px !important;
+    }
+
+    /* Saves list mobile */
+    .saves-list {
+        max-height: 250px;
+    }
+
+    .save-item {
+        padding: 12px;
+        font-size: 0.75rem;
+    }
+
+    /* Status bar extra small */
+    .sovereign-status-bar {
+        min-height: 140px;
+        padding: 12px 8px !important;
+        font-size: 0.7rem;
+    }
+
+    .status-center {
+        flex-direction: column;
+        gap: 8px !important;
+    }
+
+    .status-center a {
+        font-size: 0.75rem !important;
+    }
+
+    /* Login button extra small */
+    .wax-seal {
+        width: 40px;
+        height: 40px;
+    }
+
+    .wax-seal::after {
+        font-size: 18px;
+    }
+}
+
+/* Extra Small Phones (< 360px) */
+@media (max-width: 360px) {
+    .dashboard {
+        padding: 10px 8px 150px;
+    }
+
+    .card {
+        padding: 12px;
+    }
+
+    .card-title {
+        font-size: 0.85rem;
+    }
+
+    #clock-display {
+        font-size: 1.5rem !important;
+    }
+
+    .reckoner-display {
+        font-size: 1.3rem;
+    }
+
+    .calc-btn {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .card:hover {
+        transform: none;
+    }
+
+    .calc-btn:active,
+    .ledger-btn:active,
+    .back-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Larger touch targets */
+    .calc-btn,
+    .ledger-btn {
+        min-height: 44px;
+    }
+
+    .wax-seal {
+        min-width: 44px;
+        min-height: 44px;
+    }
 }

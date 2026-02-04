@@ -244,7 +244,7 @@ async function updateSaves() {
                     <div style="font-size: 0.75rem; display: flex; flex-direction: column; gap: 8px; align-items: center;">
                         <span>📝 Record in Notepad</span>
                         <span>🔢 Hit '=' on Calculator</span>
-                        <span>📊 Add Money Dairy entry</span>
+                        <span>📊 Add Money Diary entry</span>
                     </div>
                 </div>
             `;
